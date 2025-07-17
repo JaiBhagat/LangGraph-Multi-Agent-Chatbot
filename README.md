@@ -29,7 +29,7 @@ Ensure these files are in your project directory:
 
 ### 4. Run the Dashboard
 ```bash
-streamlit run updated_langgraph_integration.py
+streamlit run langgraph_persona_system.py
 ```
 
 Sample Question :
