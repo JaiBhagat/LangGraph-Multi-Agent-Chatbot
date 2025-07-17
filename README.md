@@ -32,6 +32,13 @@ Ensure these files are in your project directory:
 streamlit run updated_langgraph_integration.py
 ```
 
+Sample Question :
+
+
+Can you summarise the revenue share for Clothing Product category.
+
+Can you summarise the revenue share of Catherine Abel by Product Category.
+
 ## Features
 
 - **Multi-Agent Orchestration**: Uses LangGraph for sophisticated agent coordination
