@@ -14,10 +14,10 @@ OPENAI_API_KEY=your_openai_api_key_here
 
 ### 3. Required Files
 Ensure these files are in your project directory:
-- `model.py` (your existing model file)
+- `model.py` 
 - `metadata_adv.txt` (database schema)
 - `query_example.txt` (SQL examples)
-- `Data/` folder with CSV files:
+- `Data/`
   - `customers.csv`
   - `products.csv`
   - `sales.csv`
