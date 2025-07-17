@@ -40,7 +40,7 @@ streamlit run updated_langgraph_integration.py
 - **Real-time SQL Generation**: Creates optimized queries for each persona
 - **Interactive Dashboard**: Streamlit-based UI with visualization support
 
-## 🛠️ Architecture
+## Architecture
 
 The system uses a multi-agent workflow:
 1. **Persona Router** → Determines user role
