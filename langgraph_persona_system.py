@@ -31,9 +31,9 @@ try:
         productcategory, vendor, productvendor, 
         employee, sales
     )
-    st.success("✅ Successfully imported your existing model.py components!")
+    st.success("Successfully imported your existing model.py components!")
 except ImportError as e:
-    st.error(f"❌ Could not import from model.py: {e}")
+    st.error(f"Could not import from model.py: {e}")
     # For demo purposes, create fallback functions
     def func_final_result(query):
         return ["Demo response", "SELECT 'demo' as result"]
@@ -588,7 +588,7 @@ class PersonaMultiAgentSystem:
             return {
                 "success": False,
                 "error": str(e),
-                "messages": [AIMessage(content=f"❌ System error: {str(e)}")],
+                "messages": [AIMessage(content=f"System error: {str(e)}")],
                 "persona": "unknown",
                 "confidence": 0.0,
                 "sql_query": "",
