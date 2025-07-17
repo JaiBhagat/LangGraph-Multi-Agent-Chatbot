@@ -1,0 +1,65 @@
+Q1: What is the total revenue of the product 'Mountain-100 Black, 42'?
+A1: select products.ProductName, sum(OrderQty) as total_sales_qty, sum(LineTotal) as numeric as total_sale_amount 
+   from sales 
+   inner join products on sales.ProductID = products.ProductID 
+   where products.ProductName = 'Mountain-100 Black, 42' 
+   group by products.ProductName
+
+
+Q2: What is the total profit from the product 'Mountain-100 Black, 42'?
+A2: select products.ProductName, sum(LineTotal) - sum(sales.OrderQty*products.StandardCost) as total_profit
+   from sales
+   inner join products on sales.ProductID = products.ProductID
+   where products.ProductName = 'Mountain-100 Black, 42'
+   group by products.ProductName
+
+
+Q3: Show me the name of top 5 employees with respect to highest sales amount
+A3: select employee.FullName, sum(LineTotal) as total_sales_amount
+   from sales
+   inner join employee on sales.EmployeeID = employee.EmployeeID
+   group by employee.FullName
+   order by employee.FullName desc limit 5
+
+
+Q4: What do we know about product 'Road-450 Red, 52'?
+A4: with product_details as (select * from products where ProductName = 'Road-450 Red, 52'), 
+    product_profit_sales as (select sales.ProductID, 
+                                    sum(LineTotal) as total_revenue_amount, 
+                                    sum(LineTotal) - sum(sales.OrderQty*products.StandardCost) as total_profit
+                             from sales 
+                             inner join products on sales.ProductID = products.ProductID 
+                             where products.ProductName = 'Road-450 Red, 52' 
+                             group by sales.ProductID 
+                            )
+    select * 
+    from product_details
+    left join product_profit_sales using (ProductID)
+
+
+Q5: What do we  know about customer 'Jauna Elson'?
+A5: with customer_details as (select * from customers where lower(FullName) like lower('%Jauna%Elson%')), 
+    customer_sales as (select sales.CustomerID, OrderDate, sum(LineTotal) as total_date_revenue 
+                       from sales 
+                       inner join customers on sales.CustomerID = customers.CustomerID 
+                       where lower(customers.FullName) like lower('%Jauna%Elson%')
+                       group by sales.CustomerID, OrderDate
+                       order by OrderDate desc limit 5 
+                      ) 
+     select * 
+     from customer_details 
+     left join customer_sales using (CustomerID)
+
+
+Q6: What do we know about the employee 'Tsvi Reiter'?
+A6: with employee_details as (select * from employee where lower(FullName) like lower('%Tsvi%Reiter%')), 
+    employee_sales as (select sales.EmployeeID, sum(LineTotal) as total_revenue_amount 
+                       from sales 
+                       inner join employee on sales.EmployeeID = employee.EmployeeID 
+                       where lower(employee.FullName) like lower('%Tsvi%Reiter%') 
+                       group by sales.EmployeeID
+                      ) 
+    select * 
+    from employee_details 
+    left join employee_sales using (EmployeeID)
+

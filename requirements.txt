@@ -1,0 +1,12 @@
+# Core LangGraph and LangChain dependencies
+langgraph>=0.2.0
+langchain-core>=0.3.0
+langchain-openai>=0.2.0
+langchain>=0.3.0
+
+# Streamlit for web interface
+streamlit>=1.35.0
+streamlit-plotly-events>=0.0.6
+
+# Database and SQL
+pandasql>=0.7.3

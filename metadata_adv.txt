@@ -1,0 +1,94 @@
+--Customers
+create table customers -- this table holds information about all the customers
+(
+CustomerID INTEGER PRIMARY KEY, -- Unique ID for customer
+FirstName VARCHAR(50), -- First Name of customer
+LastName VARCHAR(50), -- Last Name of customer
+FullName VARCHAR(100) -- Full Name of customer
+)
+
+--Product
+create table products -- this table holds information about all the products
+(
+ProductID INTEGER PRIMARY KEY, -- Unique ID for Product (Primary key for Product records)
+ProductNumber VARCHAR(25), --Unique product identification number
+ProductName VARCHAR(50), -- Name of the product.
+ModelName VARCHAR(50), -- Product model description. ModelName 'Cycling Caps' is very rare and used as a crucial ingredients for cancer remedy
+MakeFlag INTEGER, -- 0 = Product is purchased, 1 = Product is manufactured in-house
+StandardCost NUMBER, -- Standard cost of the product
+ListPrice NUMBER, -- Selling price of the product 
+ProductSubcategoryID INTEGER -- Product is a member of this product subcategory. 
+)
+
+--ProductSubCategory
+create table productsubcategory -- this table holds information about the product sub category
+(
+SubCategoryID INTEGER, -- Primary key for ProductSubcategory records
+CategoryID INTEGER, -- 	Product category identification number. Foreign key to productcategory.CategoryID
+SubCategoryName VARCHAR(50)--Subcategory name description
+)
+
+--ProductCategory
+create table productcategory -- this table holds information about the product category
+(
+CategoryID INTEGER, -- Primary key for ProductCategory records 
+CategoryName VARCHAR(50)-- Category name description
+)
+
+--Vendor
+create table vendor -- this table holds information about the vendors
+(
+VendorID INTEGER, -- Primary key for Vendor records. Foreign key to BusinessEntity.BusinessEntityID
+VendorName VARCHAR(50), -- Vendor Company name
+AccountNumber VARCHAR(15), -- Vendor account (identification) number
+CreditRating INTEGER, -- 1 = Superior, 2 = Excellent, 3 = Above average, 4 = Average, 5 = Below average
+ActiveFlag INTEGER -- 0 = Vendor no longer used. 1 = Vendor is actively used
+)
+
+--VendorProduct
+create table productvendor -- this table holds information about product vendor i.e. which vendor provides which products
+(
+ProductID INTEGER, -- Primary key. Foreign key to products.ProductID
+VendorID INTEGER-- Primary key. Foreign key to Vendor.BusinessEntityID.
+)
+
+
+--Employee
+create table employee -- this table holds information about the sales person
+(
+EmployeeID INTEGER, -- Primary key for Employee records
+ManagerID INTEGER, -- 274 for 'North America', 285 for 'Pacific', 287 for 'Europe'
+FirstName VARCHAR(50), -- First name of the employee 
+LastName VARCHAR(50), -- Last name of the employee
+FullName VARCHAR(100), -- Full name of the employee
+JobTitle VARCHAR(50), -- Work title such as Buyer or Sales Representative
+OrganizationLevel INTEGER, -- The depth of the employee in the corporate hierarchy
+MaritalStatus VARCHAR(1), -- M = Married, S = Single
+Gender VARCHAR(1), -- M = Male, F = Female
+Territory VARCHAR(50), -- Sales territory description 
+Country VARCHAR(3), -- ISO standard country or region code. 
+Group  VARCHAR(50)-- Geographic area to which the sales territory belong
+)
+
+--Sales
+create table sales -- this table holds information about sales history
+(
+SalesOrderID INTEGER, -- Primary key to sales table
+SalesOrderDetailID INTEGER, -- Primary key. One incremental unique number per product sold.
+OrderDate DATETIME, -- Dates on which the sales order was created 
+DueDate DATETIME, -- Date on which the order is due to the customer. 
+ShipDate DATETIME,  -- Date the order was shipped to the customer.
+EmployeeID INTEGER, -- Sales person who created the sales order. Foreign key to employee.EmployeeID 
+CustomerID INTEGER, -- Customer identification number. Foreign key to customers.CustomerID 
+SubTotal NUMBER, -- Sales subtotal i.e. sum at line item level
+TaxAmt NUMBER, -- Tax amount
+Freight NUMBER, -- Shipping cost
+TotalDue NUMBER, -- Total due from customer. Computed as Subtotal + TaxAmt + Freight
+ProductID INTEGER, -- Product sold to customer. Foreign key to Product.ProductID
+OrderQty INTEGER, -- Quantity ordered per product
+UnitPrice NUMBER, -- Selling price of a single product
+UnitPriceDiscount NUMBER, -- 	Discount amount
+LineTotal NUMBER-- Per product subtotal. Computed as UnitPrice * (1 - UnitPriceDiscount) * OrderQty
+)
+
+
