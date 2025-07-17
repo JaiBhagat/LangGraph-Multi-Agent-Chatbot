@@ -32,7 +32,7 @@ Ensure these files are in your project directory:
 streamlit run updated_langgraph_integration.py
 ```
 
-## 🎯 Features
+## Features
 
 - **Multi-Agent Orchestration**: Uses LangGraph for sophisticated agent coordination
 - **Persona-Aware Analysis**: Adapts insights and KPIs based on user role
